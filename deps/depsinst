@@ -1,0 +1,15 @@
+#!/bin/ash
+
+ARCH=$1
+DEPS_PATH=$2
+OPENWRT_REPO=$3
+
+echo "ARCH: ${ARCH}, DEPS_PATH: ${DEPS_PATH}"
+
+cp "${DEPS_PATH}/${ARCH}/${OPENWRT_REPO}/spectral_scan" /usr/bin/spectral_scan
+cp "${DEPS_PATH}/spectral_scan.sh" /etc/init.d/spectral_scam
+cp "${DEPS_PATH}/spectral_scan.conf" /etc/config/spectral
+chmod +x /usr/bin/spectral_scan
+chmod +x /etc/init.d/spectral_scan
+
+

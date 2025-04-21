@@ -1,0 +1,9 @@
+#!/bin/ash
+
+ARCH=$1
+DEPS_PATH=$2
+
+echo "ARCH: ${ARCH}, DEPS_PATH: ${DEPS_PATH}"
+rm /usr/bin/spectral_scan
+rm /etc/init.d/spectral_scan
+rm /etc/config/spectral_scan

@@ -1,0 +1,91 @@
+{
+  "name": "com_rak_ht",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@hookform/resolvers": "2.8.4",
+    "@material-ui/core": "4.12.2",
+    "lodash.isempty": "^4.4.0",
+    "react": "17.0.2",
+    "react-app-polyfill": "1.0.6",
+    "react-dom": "17.0.2",
+    "react-hook-form": "7.21.0",
+    "react-intl": "^6.0.1",
+    "react-redux": "7.2.1",
+    "react-scripts": "5.0.0",
+    "source-map-explorer": "2.5.2",
+    "yup": "0.32.9",
+    "echarts": "5.2.0",
+    "echarts-for-react": "3.0.1"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "GENERATE_SOURCEMAP=false craco build",
+    "eject": "craco eject",
+    "checkTs": "tsc --noEmit",
+    "eslint": "eslint --ext js,ts,tsx",
+    "lint": "yarn run eslint src",
+    "lint:fix": "yarn run eslint --fix src",
+    "prettify": "prettier --write \"**/*.ts?(x)\"",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "npm": ">=8.5.5",
+    "node": ">=16.15.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "yarn run eslint --fix"
+    ],
+    "*.{md,json}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run checkTs && lint-staged"
+    }
+  },
+  "devDependencies": {
+    "@craco/craco": "6.4.3",
+    "@hookform/devtools": "4.0.1",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "16.9.8",
+    "@types/react-redux": "7.1.9",
+    "@types/react-router-dom": "5.3.2",
+    "@types/webpack": "4.41.22",
+    "@types/webpack-env": "1.15.2",
+    "babel-eslint": "10.1.0",
+    "craco-module-federation": "1.1.0",
+    "csstype": "3.0.10",
+    "eslint": "7.28.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-config-react-app": "7.0.0",
+    "eslint-plugin-flowtype": "8.0.3",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.27.0",
+    "eslint-plugin-react-hooks": "4.1.0",
+    "husky": "4.2.5",
+    "lint-staged": "10.3.0",
+    "prettier": "2.1.1",
+    "typescript": "4.4.4"
+  },
+  "resolutions": {
+  "@types/react": "17.0.2",
+  "@types/react-dom": "17.0.2"
+  }
+}

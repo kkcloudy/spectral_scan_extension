@@ -1,0 +1,19 @@
+{
+  "extensions": "Extensions",
+  "configuration": "Configuration",
+  "spectralScan": "Spectral Scan",
+  "enable": "Enable",
+  "enableService": "Enable Service",
+  "option": "Option",
+  "startFrequency": "Start Frequency (KHz)",
+  "channelNumber": "Channel Number",
+  "step":"Steps (KHz)",
+  "rssiOffset":"RSSI Offset (dB)",
+  "result": "Scan Result",
+  "startScan": "Start",
+  "stopScan": "Stop",
+  "thisFieldShouldBeAtLeast": "This field should be at least {length} character(s) long.",
+  "thisFieldShouldNotBeLongerThen": "This field should not be longer than {length}.",
+  "invalidCharacters": "Invalid characters. Please check the input.",
+  "thisFieldCannotBeEmpty": "This field cannot be empty."
+}
