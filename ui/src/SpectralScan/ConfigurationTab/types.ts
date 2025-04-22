@@ -9,5 +9,5 @@ export interface tableItem {
   start_freq: string;
   channel_num: string;
   step: string;
-  time: string,
+  time: string;
 }

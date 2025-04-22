@@ -3,7 +3,13 @@ import isEmpty from 'lodash.isempty';
 import { useApiRequest } from 'host/useApiRequest';
 // import { getRequestStatus } from 'host/getRequestStatus';
 
-import { getConfig, setConfig, getCurData, getHisList } from 'api/actions';
+import {
+  getConfig,
+  setConfig,
+  getCurData,
+  getHisList,
+  getHisData,
+} from 'api/actions';
 import { tableItem } from 'SpectralScan/ConfigurationTab/types';
 
 export const useConfigurationTabForm = ({ reset }) => {
@@ -11,6 +17,7 @@ export const useConfigurationTabForm = ({ reset }) => {
   const setConfigRequest = useApiRequest(setConfig);
   const getCurDataRequest = useApiRequest(getCurData);
   const getHisListRequest = useApiRequest(getHisList);
+  const getHisDataRequest = useApiRequest(getHisData);
 
   const [isStartLoad, setIsStartLoad] = useState(false);
   const [isStopLoad, setIsStopLoad] = useState(false);
@@ -46,7 +53,7 @@ export const useConfigurationTabForm = ({ reset }) => {
     const data = response?.payload?.payload;
 
     if (response && !isEmpty(data)) {
-      setHisList(data)
+      setHisList(data);
     }
   }, [getHisListRequest]);
 
@@ -60,7 +67,7 @@ export const useConfigurationTabForm = ({ reset }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     void getHisListRequestHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -103,10 +110,19 @@ export const useConfigurationTabForm = ({ reset }) => {
     }, 3000);
   }, [setConfigRequest]);
 
-  const handleRowClick = id => {
-    setSelectedRow(id);
-  };
-
+  const handleRowClick = useCallback(
+    async id => {
+      setSelectedRow(id);
+      const response = await getHisDataRequest({ id: id });
+      const data = response?.payload?.payload;
+      if (response && !isEmpty(data)) {
+        setXaxis(data.xAxis);
+        setYaxis(data.yAxis);
+        setData(data.curData);
+      }
+    },
+    [getHisDataRequest],
+  );
 
   return {
     xaxis,

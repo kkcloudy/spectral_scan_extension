@@ -38,3 +38,10 @@ export const [getHisList] = createRequestAction({
   }),
 });
 
+export const [getHisData] = createRequestAction({
+  type: 'GET_HISTORY_DATA',
+  payload: ({ id }) => ({
+    url: `${endpoints.history_data}/${id}`,
+    method: 'GET',
+  }),
+});

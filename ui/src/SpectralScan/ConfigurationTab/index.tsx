@@ -36,17 +36,17 @@ export const ConfigurationTab: FC = () => {
   const headerStyle = {
     backgroundColor: '#f5f5f5',
     padding: '12px',
-    borderBottom: '1px solid #ddd'
+    borderBottom: '1px solid #ddd',
   };
 
   const rowStyle = {
     borderBottom: '1px solid #ddd',
-    transition: 'background-color 0.2s'
+    transition: 'background-color 0.2s',
   };
 
   const cellStyle = {
     padding: '12px',
-    textAlign: 'center' as const
+    textAlign: 'center' as const,
   };
 
   return (
@@ -116,14 +116,15 @@ export const ConfigurationTab: FC = () => {
               </tr>
             </thead>
             <tbody>
-              {hisList.map((item) => (
+              {hisList.map(item => (
                 <tr
                   key={item.id}
                   onClick={() => handleRowClick(item.id)}
                   style={{
                     ...rowStyle,
-                    backgroundColor: selectedRow === item.id ? '#e3f2fd' : 'white',
-                    cursor: 'pointer'
+                    backgroundColor:
+                      selectedRow === item.id ? '#e3f2fd' : 'white',
+                    cursor: 'pointer',
                   }}
                 >
                   <td style={cellStyle}>{item.id}</td>
@@ -136,7 +137,6 @@ export const ConfigurationTab: FC = () => {
             </tbody>
           </table>
         </div>
-
 
         <DevTool control={control} />
       </form>
