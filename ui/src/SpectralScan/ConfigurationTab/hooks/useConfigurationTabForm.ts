@@ -27,6 +27,7 @@ export const useConfigurationTabForm = ({ reset }) => {
   const [hisList, setHisList] = useState<tableItem[]>([]);
   const [isEnabled, setIsEnabled] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [open, setOpen] = useState<boolean>(false);
 
   const getConfigRequestHandler = useCallback(async () => {
     const response = await getConfigRequest();
@@ -124,6 +125,14 @@ export const useConfigurationTabForm = ({ reset }) => {
     [getHisDataRequest],
   );
 
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
   return {
     xaxis,
     yaxis,
@@ -136,5 +145,8 @@ export const useConfigurationTabForm = ({ reset }) => {
     handleStart,
     handleStop,
     handleRowClick,
+    open,
+    handleCloseModal,
+    handleOpenModal,
   };
 };

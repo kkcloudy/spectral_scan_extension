@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import { FormBlock } from 'host/FormBlock';
 import { CustomButton } from 'host/CustomButton';
 import { TextFormField } from 'host/TextFormField';
+import { ConfirmModal } from 'host/ConfirmModal';
 import { useFormConfig } from 'SpectralScan/ConfigurationTab/hooks/useFormConfig';
 import { useConfigurationTabForm } from 'SpectralScan/ConfigurationTab/hooks/useConfigurationTabForm';
 import { FC } from 'react';
@@ -29,6 +30,9 @@ export const ConfigurationTab: FC = () => {
     handleStart,
     handleStop,
     handleRowClick,
+    open,
+    handleCloseModal,
+    handleOpenModal,
   } = useConfigurationTabForm({
     reset,
   });
@@ -79,11 +83,11 @@ export const ConfigurationTab: FC = () => {
 
           <div className={classes.formBlock}>
             <CustomButton
-              type="submit"
               variant="contained"
               customSize="small"
               disabled={isEnabled}
               loading={isStartLoad}
+              onClick={handleOpenModal}
               additionalClass={classes.submit}
             >
               {formatMessage({ id: 'startScan' })}
@@ -101,6 +105,17 @@ export const ConfigurationTab: FC = () => {
             </CustomButton>
           </div>
         </FormBlock>
+
+        {open && (
+          <ConfirmModal
+            isOpenModal={open}
+            onSubmit={handleSubmit(handleStart)}
+            onClose={handleCloseModal}
+            submitText="common.confirm"
+            titleId="Start Spectral Scan?"
+            modalTextId="Start a new scan will stop all lora service, are you sure you will start?"
+          />
+        )}
 
         <HeatMapTab xaxis={xaxis} yaxis={yaxis} data={data} />
 
