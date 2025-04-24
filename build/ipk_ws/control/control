@@ -1,8 +1,0 @@
-Package: wes-com_rak_spectral_scan
-Version: 1.0.0
-Section: RAKwireless
-Description: Scan the spectral band and compute RSSI on serval frequencies.
-Maintainer: dev@rakwireless.com
-Architecture: all
-Depends: wisgate-rt (>=1.0.0-1)
-
