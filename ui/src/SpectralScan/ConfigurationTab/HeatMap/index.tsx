@@ -52,55 +52,54 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
       type: 'category',
       data: xaxis,
       name: 'FREQ(KHz)',
-      nameTextStyle: {
-        fontSize: 10,
-        color: '#000000',
-      },
-      axisLine: {
-        lineStyle: {
-          color: '#CECECE',
-        },
-      },
-      axisTick: {
-        alignWithLabel: false,
-      },
-      splitArea: {
-        show: true,
-      },
-      maxInterval: 1,
-      axisLabel: {
-        lineHeight: 16,
-        color: '#B4B4B4',
-        interval: 0,
-        fontSize: 11,
-      },
+      // nameTextStyle: {
+      //  fontSize: 10,
+      //  color: '#000000',
+      // },
+      // axisLine: {
+      //  lineStyle: {
+      //    color: '#CECECE',
+      //  },
+      // },
+      // axisTick: {
+      //  alignWithLabel: false,
+      // },
+      // splitArea: {
+      //  show: true,
+      // },
+
+      // axisLabel: {
+      //  lineHeight: 16,
+      //  color: '#B4B4B4',
+      //  fontSize: 11,
+      // },
     },
     yAxis: {
       type: 'category',
       data: yaxis,
       name: 'Time',
-      axisTick: {
-        alignWithLabel: true,
-      },
-      nameTextStyle: {
-        fontSize: 10,
-        color: '#000000',
-      },
-      axisLine: {
-        lineStyle: {
-          color: '#CECECE',
-        },
-      },
-      axisLabel: {
-        lineHeight: 16,
-        color: '#B4B4B4',
-        fontSize: 10,
-      },
-      position: 'left',
+      // axisTick: {
+      //  alignWithLabel: true,
+      // },
+      // nameTextStyle: {
+      //  fontSize: 10,
+      //  color: '#000000',
+      // },
+      // axisLine: {
+      //  lineStyle: {
+      //    color: '#CECECE',
+      //  },
+      // },
+      // axisLabel: {
+      //  lineHeight: 16,
+      //  color: '#B4B4B4',
+      //  fontSize: 10,
+      // },
+      // position: 'left',
     },
     visualMap: {
-      min: -135,
-      max: -11,
+      min: -105,
+      max: -10,
       calculable: true,
       orient: 'horizontal',
       top: '0px',
@@ -111,13 +110,15 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
       fontSize: '22px',
       inRange: {
         color: [
-          '#0000FF',
-          '#00FFFF',
-          '#00FF00',
-          '#FFFF00',
-          '#FFA500',
-          '#FF0000',
-          '#FF00FF',
+          '#00FF00', // 绿色（中等信号强度）
+          '#66FF00', // 绿色到黄色的过渡色1
+          '#99FF00', // 绿色到黄色的过渡色2
+          '#CCFF00', // 绿色到黄色的过渡色3
+          '#FFFF00', // 黄色
+          '#FFCC00', // 黄色到红色的过渡色1
+          '#FF9900', // 黄色到红色的过渡色2
+          '#FF6600', // 黄色到红色的过渡色3
+          '#FF0000', // 红色（最高信号强度）
         ],
       },
       indicatorIcon: 'none',

@@ -35,6 +35,8 @@ export const useConfigurationTabForm = ({ reset }) => {
 
     if (response && !isEmpty(data)) {
       reset({ ...data });
+      setIsEnabled(data.enable);
+      setIsStartLoad(data.enable);
     }
   }, [getConfigRequest, reset]);
 
