@@ -1,4 +1,4 @@
-import { SpectralScanInputs } from 'SpectralScan/ConfigurationTab/types';
+import { SpectralScanInputs } from 'SpectralScan/LiveScanTab/types';
 
 export const initialValues: SpectralScanInputs = {
   start_frequency: 863100,

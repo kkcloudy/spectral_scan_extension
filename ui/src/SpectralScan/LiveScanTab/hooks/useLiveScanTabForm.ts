@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import isEmpty from 'lodash.isempty';
 import { useApiRequest } from 'host/useApiRequest';
 // import { getRequestStatus } from 'host/getRequestStatus';
@@ -10,17 +10,15 @@ import {
   getHisList,
   getHisData,
 } from 'api/actions';
-import { tableItem } from 'SpectralScan/ConfigurationTab/types';
+import { tableItem } from 'SpectralScan/LiveScanTab/types';
 
-export const useConfigurationTabForm = ({ reset }) => {
+export const useLiveScanTabForm = ({ reset }) => {
   const getConfigRequest = useApiRequest(getConfig);
   const setConfigRequest = useApiRequest(setConfig);
   const getCurDataRequest = useApiRequest(getCurData);
   const getHisListRequest = useApiRequest(getHisList);
   const getHisDataRequest = useApiRequest(getHisData);
 
-  const [isStartLoad, setIsStartLoad] = useState(false);
-  const [isStopLoad, setIsStopLoad] = useState(false);
   const [xaxis, setXaxis] = useState<string[]>([]);
   const [yaxis, setYaxis] = useState<string[]>([]);
   const [data, setData] = useState<number[][]>([]);
@@ -29,6 +27,8 @@ export const useConfigurationTabForm = ({ reset }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [open, setOpen] = useState<boolean>(false);
 
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const getConfigRequestHandler = useCallback(async () => {
     const response = await getConfigRequest();
     const data = response?.payload?.payload;
@@ -36,7 +36,6 @@ export const useConfigurationTabForm = ({ reset }) => {
     if (response && !isEmpty(data)) {
       reset({ ...data });
       setIsEnabled(data.enable);
-      setIsStartLoad(data.enable);
     }
   }, [getConfigRequest, reset]);
 
@@ -75,43 +74,53 @@ export const useConfigurationTabForm = ({ reset }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (isEnabled) {
-          void getCurDataRequestHandler();
-        }
-      } catch (error) {
-        console.error('请求失败:', error);
-      }
-    };
+  // useEffect(() => {
+  //  const fetchData = async () => {
+  //    try {
+  //      if (isEnabled) {
+  //        void getCurDataRequestHandler();
+  //      }
+  //    } catch (error) {
+  //      console.error('请求失败:', error);
+  //    }
+  //  };
 
-    const intervalId = setInterval(fetchData, 2000);
+  //  const intervalId = setInterval(fetchData, 2000);
 
-    return () => clearInterval(intervalId);
-  }, [getCurDataRequestHandler, isEnabled]);
+  //  return () => clearInterval(intervalId);
+  // }, [getCurDataRequestHandler, isEnabled]);
 
   const handleStart = useCallback(
     async values => {
       setXaxis([]);
       setYaxis([]);
       setData([]);
-      setIsEnabled(true);
-      setIsStartLoad(true);
-      await setConfigRequest({ data: { ...values, enable: true } });
-    },
-    [setConfigRequest],
-  );
+      if (isEnabled) {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+        setIsEnabled(false);
+        await setConfigRequest({ data: { ...values, enable: false } });
+      } else {
+        setIsEnabled(true);
+        await setConfigRequest({ data: { ...values, enable: true } });
 
-  const handleStop = useCallback(async () => {
-    await setConfigRequest({ data: { enable: false } });
-    setIsStartLoad(false);
-    setIsStopLoad(true);
-    setTimeout(() => {
-      setIsEnabled(false);
-      setIsStopLoad(false);
-    }, 3000);
-  }, [setConfigRequest]);
+        const fetchData = async () => {
+          try {
+            await getCurDataRequestHandler();
+          } catch (error) {
+            console.error('请求失败:', error);
+          }
+        };
+
+        setTimeout(() => {
+          intervalRef.current = setInterval(fetchData, 2000);
+        }, 5000);
+      }
+    },
+    [isEnabled, setConfigRequest, getCurDataRequestHandler],
+  );
 
   const handleRowClick = useCallback(
     async id => {
@@ -132,7 +141,13 @@ export const useConfigurationTabForm = ({ reset }) => {
   };
 
   const handleOpenModal = () => {
-    setOpen(true);
+    if (isEnabled) {
+      setOpen(false);
+      setIsEnabled(false);
+      setConfigRequest({ data: { enable: false } });
+    } else {
+      setOpen(true);
+    }
   };
 
   return {
@@ -141,11 +156,8 @@ export const useConfigurationTabForm = ({ reset }) => {
     data,
     hisList,
     selectedRow,
-    isStartLoad,
-    isStopLoad,
     isEnabled,
     handleStart,
-    handleStop,
     handleRowClick,
     open,
     handleCloseModal,

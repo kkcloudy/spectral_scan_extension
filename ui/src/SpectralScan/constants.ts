@@ -1,11 +1,16 @@
 export enum SpectralScanTabs {
-  CONFIGURATION = 'configuration',
+  LIVE_SCAN = 'live_scan',
+  HISTORY = 'history',
 }
 
 export const tabsList = [
   {
-    value: SpectralScanTabs.CONFIGURATION,
-    name: 'configuration',
+    value: SpectralScanTabs.LIVE_SCAN,
+    name: 'Live Scan',
+  },
+  {
+    value: SpectralScanTabs.HISTORY,
+    name: 'History',
   },
 ];
 

@@ -1,8 +1,7 @@
 import { IntlProvider } from 'react-intl';
-
 import { Header } from 'SpectralScan/Header';
-import { ConfigurationTab } from 'SpectralScan/ConfigurationTab';
-
+import { LiveScanTab } from 'SpectralScan/LiveScanTab';
+import { HistoryTab } from 'SpectralScan/HistoryTab';
 import { translations } from 'locales';
 import { SpectralScanTabs } from 'SpectralScan/constants';
 import { useSpectralScan } from 'SpectralScan/hooks/useSpectralScan';
@@ -20,7 +19,11 @@ const SpectralScan = () => {
           breadcrumbs={breadcrumbs}
           handleChangeTab={handleChangeTab}
         />
-        {activeTab === SpectralScanTabs.CONFIGURATION && <ConfigurationTab />}
+        {activeTab === SpectralScanTabs.LIVE_SCAN ? (
+          <LiveScanTab />
+        ) : (
+          <HistoryTab />
+        )}
       </div>
     </IntlProvider>
   );

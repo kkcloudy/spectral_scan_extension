@@ -1,19 +1,21 @@
 {
   "extensions": "Extensions",
   "configuration": "Configuration",
-  "spectralScan": "Spectral Scan",
+  "spectralScan": "Spectrum Scanner",
   "enable": "Enable",
   "enableService": "Enable Service",
   "option": "Option",
   "startFrequency": "Start Frequency (KHz)",
   "channelNumber": "Channel Number",
-  "step":"Steps (KHz)",
-  "rssiOffset":"RSSI Offset (dB)",
+  "step": "Steps (KHz)",
+  "rssiOffset": "RSSI Offset (dB)",
   "result": "Scan Result",
-  "startScan": "Start",
-  "stopScan": "Stop",
+  "startScan": "Start Scan",
+  "stopScan": "Stop Scan",
   "thisFieldShouldBeAtLeast": "This field should be at least {length} character(s) long.",
   "thisFieldShouldNotBeLongerThen": "This field should not be longer than {length}.",
   "invalidCharacters": "Invalid characters. Please check the input.",
-  "thisFieldCannotBeEmpty": "This field cannot be empty."
+  "thisFieldCannotBeEmpty": "This field cannot be empty.",
+  "warningTitle": "Are you sure you want to start scanning?",
+  "warningMessage": "You’re about to start a spectral scan. This wil stop all LoRaWAN packet transmissions and may impact your network. Make sure this doesn't interrupt any critical services before you continue."
 }

@@ -2,9 +2,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { SpectralScanInputs } from 'SpectralScan/ConfigurationTab/types';
-import { initialValues } from 'SpectralScan/ConfigurationTab/constants';
-import { useSchema } from 'SpectralScan/ConfigurationTab/hooks/useSchema';
+import { SpectralScanInputs } from 'SpectralScan/LiveScanTab/types';
+import { initialValues } from 'SpectralScan/LiveScanTab/constants';
+import { useSchema } from 'SpectralScan/LiveScanTab/hooks/useSchema';
 
 export const useFormConfig = () => {
   const schema = useSchema();

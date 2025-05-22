@@ -7,11 +7,12 @@ import {
   GridComponent,
   TitleComponent,
   TooltipComponent,
+  ToolboxComponent,
   VisualMapComponent,
   VisualMapContinuousComponent,
 } from 'echarts/components';
 
-import { HeatMapTabProps } from 'SpectralScan/ConfigurationTab/HeatMap/types';
+import { HeatMapTabProps } from 'SpectralScan/HeatMap/types';
 
 export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
   echarts.use([
@@ -20,6 +21,7 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
     TitleComponent,
     CanvasRenderer,
     TooltipComponent,
+    ToolboxComponent,
     VisualMapComponent,
     VisualMapContinuousComponent,
   ]);
@@ -40,12 +42,15 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
     },
     toolbox: {
       show: true,
+      feature: {
+        saveAsImage: {},
+      },
     },
     animation: false,
     grid: {
-      top: '80',
-      left: '45',
-      right: '80',
+      top: '40',
+      left: '60',
+      right: '140',
       bottom: '60',
     },
     xAxis: {
@@ -61,9 +66,10 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
       //    color: '#CECECE',
       //  },
       // },
-      // axisTick: {
-      //  alignWithLabel: false,
-      // },
+      axisTick: {
+        show: false,
+        alignWithLabel: false,
+      },
       // splitArea: {
       //  show: true,
       // },
@@ -78,9 +84,10 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
       type: 'category',
       data: yaxis,
       name: 'Time',
-      // axisTick: {
-      //  alignWithLabel: true,
-      // },
+      axisTick: {
+        show: false,
+        alignWithLabel: true,
+      },
       // nameTextStyle: {
       //  fontSize: 10,
       //  color: '#000000',
@@ -98,31 +105,31 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
       // position: 'left',
     },
     visualMap: {
-      min: -105,
-      max: -10,
+      type: 'piecewise',
       calculable: true,
-      orient: 'horizontal',
-      top: '0px',
-      right: '80px',
-      itemHeight: '200px',
-      itemWidth: '12px',
-      text: ['', 'RSSI(dB)'],
-      fontSize: '22px',
+      // orient: 'horizontal',
+      top: '40px',
+      // right: '80px',
+      left: 'right',
+      align: 'left',
+      // itemHeight: '200px',
+      itemWidth: '40px',
+      itemSymbol: 'rect',
+      // fontSize: '22px',
+      inverse: true,
+      pieces: [
+        { lte: -100 },
+        { gt: -100, lte: -75 },
+        { gt: -75, lte: -50 },
+        { gt: -50, lte: -25 },
+        { gt: -25 },
+      ],
+      precision: 0,
       inRange: {
-        color: [
-          '#00FF00', // 绿色（中等信号强度）
-          '#66FF00', // 绿色到黄色的过渡色1
-          '#99FF00', // 绿色到黄色的过渡色2
-          '#CCFF00', // 绿色到黄色的过渡色3
-          '#FFFF00', // 黄色
-          '#FFCC00', // 黄色到红色的过渡色1
-          '#FF9900', // 黄色到红色的过渡色2
-          '#FF6600', // 黄色到红色的过渡色3
-          '#FF0000', // 红色（最高信号强度）
-        ],
+        color: ['#00FF00', '#99FF00', '#FFFF00', '#FF9900', '#FF0000'],
       },
-      indicatorIcon: 'none',
-      hoverLink: false,
+      // indicatorIcon: 'none',
+      // hoverLink: false,
     },
     series: [
       {
@@ -131,6 +138,12 @@ export const HeatMapTab: FC<HeatMapTabProps> = ({ xaxis, yaxis, data }) => {
         data: data,
         label: {
           show: false,
+        },
+        itemStyle: {
+          borderWidth: 0,
+          borderColor: '#fff',
+          borderCap: 'square',
+          borderRadius: 1,
         },
       },
     ],

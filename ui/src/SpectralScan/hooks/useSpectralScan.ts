@@ -4,17 +4,12 @@ import { SpectralScanTabs, breadcrumbs } from 'SpectralScan/constants';
 
 export const useSpectralScan = () => {
   const [activeTab, setActiveTab] = useState<string>(
-    SpectralScanTabs.CONFIGURATION,
+    SpectralScanTabs.LIVE_SCAN,
   );
 
-  const handleChangeTab = useCallback(
-    (_, value: string) => {
-      if (activeTab !== SpectralScanTabs.CONFIGURATION) {
-        setActiveTab(value);
-      }
-    },
-    [activeTab],
-  );
+  const handleChangeTab = useCallback((_, value: string) => {
+    setActiveTab(value);
+  }, []);
 
   return {
     activeTab,

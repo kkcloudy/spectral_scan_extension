@@ -1,7 +1,7 @@
 Package: wes-com_rak_spectral_scan
 Version: 1.0.0
 Section: RAKwireless
-Description: Scan the spectral band and compute RSSI on serval frequencies.
+Description: Real-time RF spectrum analysis tool for monitoring frequency bands and identifying potential interference sources.
 Maintainer: dev@rakwireless.com
 Architecture: all
 Depends: wisgate-rt (>=1.0.0-1)
